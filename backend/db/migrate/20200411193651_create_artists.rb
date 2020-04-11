@@ -3,6 +3,7 @@ class CreateArtists < ActiveRecord::Migration[6.0]
     create_table :artists do |t|
       t.string :name
       t.string :age
+      t.string :gender
 
       t.timestamps
     end
