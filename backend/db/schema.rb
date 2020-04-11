@@ -46,13 +46,13 @@ ActiveRecord::Schema.define(version: 2020_04_11_203740) do
   create_table "artists", force: :cascade do |t|
     t.string "name"
     t.string "age"
+    t.string "gender"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "paintings", force: :cascade do |t|
     t.string "title"
-    t.text "caption"
     t.string "style"
     t.string "price"
     t.datetime "created_at", precision: 6, null: false
