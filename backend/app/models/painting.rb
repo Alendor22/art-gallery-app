@@ -1,6 +1,6 @@
 class Painting < ApplicationRecord
 
-  has_many :artists
-  has_many :artists, through: :art_gallery
+  has_many :art_galleries
+  has_many :artists, through: :art_galleries
 
 end
