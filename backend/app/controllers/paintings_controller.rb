@@ -5,12 +5,12 @@ class PaintingsController < ApplicationController
   def index
     @paintings = Painting.all
 
-    render json: @paintings
+    render json: @paintings, include: :artists
   end
 
   # GET /paintings/1
   def show
-    render json: @painting
+    render json: @painting, include: :artists
   end
 
   # POST /paintings
@@ -46,6 +46,6 @@ class PaintingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def painting_params
-      params.require(:painting).permit(:title, :caption, :style, :size, :price)
+      params.require(:painting).permit(:title, :style, :price)
     end
 end
