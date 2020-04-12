@@ -8,6 +8,46 @@
 <body>
   <h1>Art-Gallery-App</h1>
 
+    <form id="artist-form">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name">
+      </div><br>
+      <div>
+        <label for="age">Age:</label>
+        <input type="text" name="age" id="age">
+      </div><br>
+      <div>
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender" id="gender">
+      </div><br>
+      <div id="painting-checkboxes">
+      
+      </div>
+      <input type="submit" value="Create Painting">
+    </form>
+    <form id="insert-painting">
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title">
+      </div><br>
+      <div>
+        <label for="style">Style:</label>
+        <input type="text" name="style" id="style">
+      </div><br>
+      <div>
+        <label for="price">Price:</label>
+        <input type="text" name="price" id="price">
+      </div>
+      <div>
+        <label for="painting">Painting:</label>
+        <input type="file" name="painting" id="painting">
+      </div>
+      <input type="submit" value="Upload Painting">
+    </form>
+
+
+  <script src="javascripts/models/painting.js"></script>
   <script src="javascripts/index.js"></script>
 </body>
 </html>
