@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_04_11_203740) do
     t.string "title"
     t.string "style"
     t.string "price"
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
