@@ -8,6 +8,31 @@
 <body>
   <h1>Art-Gallery-App</h1>
 
+    <form id="insert-painting">
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title">
+      </div><br>
+      <div>
+        <label for="style">Style:</label>
+        <input type="text" name="style" id="style">
+      </div><br>
+      <div>
+        <label for="price">Price:</label>
+        <input type="text" name="price" id="price">
+      </div><br>
+      <div>
+        <label for="painting_image">Image:</label>
+        <input type="file" name="painting_image" id="painting_image">
+      </div><br>
+        <input type="submit" value="Add Painting">
+    </form>
+      <div id="paintings">
+
+      </div><br>
+    <div id="artists">
+      
+    </div><br>
     <form id="artist-form">
       <div>
         <label for="name">Name:</label>
@@ -21,33 +46,11 @@
         <label for="gender">Gender:</label>
         <input type="text" name="gender" id="gender">
       </div><br>
-      <div id="painting-checkboxes">
-      
-      </div>
-      <input type="submit" value="Create Painting">
-    </form>
-    <form id="insert-painting">
-      <div>
-        <label for="title">Title:</label>
-        <input type="text" name="title" id="title">
-      </div><br>
-      <div>
-        <label for="style">Style:</label>
-        <input type="text" name="style" id="style">
-      </div><br>
-      <div>
-        <label for="price">Price:</label>
-        <input type="text" name="price" id="price">
-      </div>
-      <div>
-        <label for="painting_image">Painting:</label>
-        <input type="file" name="painting_image" id="painting_image">
-      </div>
-      <input type="submit" value="Upload Image">
+      <input type="submit" value="Create Artist">
     </form>
 
-
+  <script src="javascripts/models/artist.js"></script>
   <script src="javascripts/models/painting.js"></script>
-  <script src="javascripts/index.js"></script>
+  <script defer src="javascripts/index.js"></script>
 </body>
 </html>
