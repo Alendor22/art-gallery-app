@@ -5,6 +5,7 @@ class CreatePaintings < ActiveRecord::Migration[6.0]
       t.string :style
       t.string :price
       t.string :url
+      t.integer :artist_id
 
       t.timestamps
     end
