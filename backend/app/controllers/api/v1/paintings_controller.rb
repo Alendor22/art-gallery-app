@@ -5,12 +5,12 @@ class Api::V1::PaintingsController < ApplicationController
   def index
     @paintings = Painting.all
 
-    render json: @paintings, include: :artists
+    render json: @paintings, include: :artist
   end
 
   # GET /paintings/1
   def show
-    render json: @painting, include: :artists
+    render json: @painting, include: :artist
   end
 
   # POST /paintings
@@ -35,7 +35,11 @@ class Api::V1::PaintingsController < ApplicationController
 
   # DELETE /paintings/1
   def destroy
-    @painting.destroy
+    if @painting.destroy 
+      render json: {message: "Painting deleted!"}, status: :201
+    else
+      render json: {message: "Painting failed to delete! "}, status: :unprocessable_entity
+    end
   end
 
   private
@@ -46,6 +50,6 @@ class Api::V1::PaintingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def painting_params
-      params.require(:painting).permit(:title, :style, :price)
+      params.require(:painting).permit(:title, :style, :price, :painting_image)
     end
 end
