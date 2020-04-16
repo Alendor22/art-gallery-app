@@ -1,6 +1,7 @@
 class Painting < ApplicationRecord
 
-  has_many :art_galleries
-  has_many :artists, through: :art_galleries
+  belongs_to :artist
 
+  validates :title, :style, :price, presence: true
+  
 end
