@@ -22,9 +22,16 @@
         <input type="text" name="price" id="price">
       </div><br>
       <div>
-        <label for="painting_image">Image:</label>
-        <input type="file" name="painting_image" id="painting_image">
+        <label for="url">Painting Image:</label>
+        <input type="text" name="url" id="url">
+        <!-- <label for="painting_image">Image:</label>
+        <input type="file" name="painting_image" id="painting_image"> -->
       </div><br>
+      <div id="add-artist">
+        <select name="artist" id="artist-select">
+          <option value="">--Please choose an artist--</option>
+      </select>
+      </div>
         <input type="submit" value="Add Painting">
     </form>
       <div id="paintings">
@@ -48,6 +55,12 @@
       </div><br>
       <input type="submit" value="Create Artist">
     </form>
+
+    <!-- <div id="search">
+      <script async src="https://cse.google.com/cse.js?cx=004943234794607487493:byuxgebpvnz"></script>
+    </div>
+    <div class="gcse-search"></div> -->
+    
 
   <script src="javascripts/models/artist.js"></script>
   <script src="javascripts/models/painting.js"></script>
