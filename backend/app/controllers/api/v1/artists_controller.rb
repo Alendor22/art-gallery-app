@@ -35,7 +35,12 @@ class Api::V1::ArtistsController < ApplicationController
 
   # DELETE /artists/1
   def destroy
-    @artist.destroy
+    if @artist.destroy
+      render json: {message: "Artist deleted!"}, status: 200
+    else
+      render json: {message: "Artist failed to delete! "}, status: :unprocessable_entity
+    end
+
   end
 
   private
