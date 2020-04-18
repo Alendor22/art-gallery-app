@@ -18,7 +18,7 @@ class Api::V1::PaintingsController < ApplicationController
     @painting = Painting.new(painting_params)
 
     if @painting.save
-      render json: @painting, status: :created, location: @painting
+      render json: @painting, include: [:artist], status: :created #location: @painting
     else
       render json: @painting.errors, status: :unprocessable_entity
     end
@@ -36,7 +36,7 @@ class Api::V1::PaintingsController < ApplicationController
   # DELETE /paintings/1
   def destroy
     if @painting.destroy 
-      render json: {message: "Painting deleted!"}, status: :201
+      render json: {message: "Painting deleted!"}, status: 200
     else
       render json: {message: "Painting failed to delete! "}, status: :unprocessable_entity
     end
@@ -50,6 +50,6 @@ class Api::V1::PaintingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def painting_params
-      params.require(:painting).permit(:title, :style, :price, :painting_image)
+      params.require(:painting).permit(:title, :style, :price, :url, :artist_id)
     end
 end
