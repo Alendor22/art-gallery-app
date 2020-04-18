@@ -13,5 +13,15 @@ class Artist {
   save() {
     Artist.all.push(this)
   }
+
+  static addArtistsToSelectDropDown() {
+    this.all.forEach((artist) => {
+      let getSelectDropDown = document.querySelector("#artist-select");
+      let option = document.createElement("option");
+      option.setAttribute("value", `${artist.id}`);
+      option.innerText += artist.name
+      getSelectDropDown.appendChild(option)
+    }); 
+  }
   
 }
