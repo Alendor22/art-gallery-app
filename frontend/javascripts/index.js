@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   loadPaintings();
-  loadArtists();
-  
+  loadArtists(); 
 })
 
 const getArtistForm = () => document.querySelector("#artist-form");
@@ -51,11 +50,12 @@ function listenForClick() {
       let lastButton = deleteButtons.length-1;
       let deleteButton = deleteButtons[lastButton];
 
-       deleteButton.addEventListener('click', deletePainting);
+       deleteButton.addEventListener('click', deletePaintingFromForm);
 
-        function deletePainting(e){
-          e.preventDefault();
-        }
+       function deletePaintingFromForm() {
+        let id = this.id
+        deletePainting(id);
+      }
     })
   });
 }
@@ -93,7 +93,7 @@ function deletePainting(id) {
       let painting = new Painting(data);
       renderPaintingFromTemplate(paintingTemplate(painting));
     });
-    deleteArtistAction()
+    deletePaintingAction()
   }
 
 function renderPaintingFromTemplate(paintingTemplate) {
@@ -109,6 +109,7 @@ function paintingTemplate(painting) {
           <p>Artist: ${painting.artist.name}</p>
           <p>Style: ${painting.style}</p>
           <p>Price: ${painting.price} </p>
+          <button id="${painting.id}">Delete Painting:</button>
         </div>
       </div><br>
     `;
@@ -144,11 +145,12 @@ getArtistForm().addEventListener('submit', createArtistFromForm);
       let lastButton = deleteButtons.length-1;
       let deleteButton = deleteButtons[lastButton];
 
-       deleteButton.addEventListener('click', deleteArtist);
+       deleteButton.addEventListener('click', deleteArtistFromForm);
 
-        function deleteArtist(e){
-          e.preventDefault()
-        }
+       function deleteArtistFromForm() {
+        let id = this.id
+        deleteArtist(id);
+      }
     })
     .catch(error => {
       alert(error)
@@ -166,8 +168,7 @@ getArtistForm().addEventListener('submit', createArtistFromForm);
             <P>Artist Name: ${artist.name}</P>
             <p>Artist Age: ${artist.age}</p>
             <p>Artist Gender: ${artist.gender}</p>
-            <p>Painting: ${artist.paintings}</p>
-            <button id="${artist.id}">Delete Artist:</button>
+            <button id="${artist.id}">Delete Artisting:</button>
           </div>
         </div>
       `;
