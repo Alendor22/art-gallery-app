@@ -3,14 +3,14 @@ class Api::V1::PaintingsController < ApplicationController
 
   # GET /paintings
   def index
-    @paintings = Painting.all
+    @paintings = Painting.all.sort_paintings
 
-    render json: @paintings, include: :artist
+    render json: @paintings, include: [:artist]
   end
 
   # GET /paintings/1
   def show
-    render json: @painting, include: :artist
+    render json: @painting, include: [:artist]
   end
 
   # POST /paintings
