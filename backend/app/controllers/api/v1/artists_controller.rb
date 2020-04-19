@@ -5,12 +5,12 @@ class Api::V1::ArtistsController < ApplicationController
   def index
     @artists = Artist.all
 
-    render json: @artists, include: :paintings
+    render json: @artists, include: [:paintings]
   end
 
   # GET /artists/1
   def show
-    render json: @artist, include: :paintings
+    render json: @artist, include: [:paintings]
   end
 
   # POST /artists
@@ -18,7 +18,7 @@ class Api::V1::ArtistsController < ApplicationController
     @artist = Artist.new(artist_params)
 
     if @artist.save
-      render json: @artist, status: :created #, location: @artists
+      render json: @artist, include: [:paintings], status: :created
     else
       render json: @artist.errors, status: :unprocessable_entity
     end
