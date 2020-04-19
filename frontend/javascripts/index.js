@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   loadPaintings();
   loadArtists();
+  
 })
 
 const getArtistForm = () => document.querySelector("#artist-form");
 const getPaintingForm = () => document.querySelector("#insert-painting");
-const getDeleteButton = () => document.querySelectorAll('.artist-card button');
+const getDeleteArtistButton = () => document.querySelectorAll('.artist-card button');
+const getDeletePaintingButton = () => document.querySelectorAll('.painting-card button');
 
 
 const getTitle = () => getPaintingForm().querySelector("#title").value;
@@ -44,26 +46,61 @@ function listenForClick() {
       console.log(data)
       let painting = new Painting(data)
       renderPaintingFromTemplate(paintingTemplate(painting));
+    
+      let deleteButtons = getDeletePaintingButton();
+      let lastButton = deleteButtons.length-1;
+      let deleteButton = deleteButtons[lastButton];
+
+       deleteButton.addEventListener('click', deletePainting);
+
+        function deletePainting(e){
+          e.preventDefault();
+        }
     })
   });
 }
 
-async function loadPaintings() {
-  let response = await fetch("http://localhost:3000/api/v1/paintings");
-  let paintings = await response.json();
-  
-  paintings.forEach((data) => {
-    let painting = new Painting(data);
-    renderPaintingFromTemplate(paintingTemplate(painting));
-  });
+function deletePaintingAction(){ 
+  let deleteButtons = getDeletePaintingButton() 
+  for(let i = 0; i < deleteButtons.length; i++){
+    deleteButtons[i].addEventListener('click', deletePaintingFromForm)
+  }
 }
+
+function deletePaintingFromForm() {
+  let id = this.id
+  deletePainting(id);
+}
+
+function deletePainting(id) {
+  fetch(`http://localhost:3000/api/v1/paintings/${id}`, {
+  method: 'DELETE'
+  
+  })
+  .then(resp => resp.json())
+  .then(painting => {
+    document.querySelector('#paintings').innerHTML = ""
+    Painting.all = []
+    loadPaintings()
+  })
+}
+
+  async function loadPaintings() {
+    let response = await fetch("http://localhost:3000/api/v1/paintings");
+    let paintings = await response.json();
+  
+    paintings.forEach((data) => {
+      let painting = new Painting(data);
+      renderPaintingFromTemplate(paintingTemplate(painting));
+    });
+    deleteArtistAction()
+  }
 
 function renderPaintingFromTemplate(paintingTemplate) {
   document.querySelector('#paintings').innerHTML += paintingTemplate
 }
 
 function paintingTemplate(painting) {
-  // debugger
   return `
       <div class="painting-card">
         <div class="painting-card-content">
@@ -103,7 +140,7 @@ getArtistForm().addEventListener('submit', createArtistFromForm);
 
       renderArtistFromTemplate(artistTemplate(artist));
       
-      let deleteButtons = getDeleteButton()
+      let deleteButtons = getDeleteArtistButton()
       let lastButton = deleteButtons.length-1;
       let deleteButton = deleteButtons[lastButton];
 
@@ -156,12 +193,12 @@ getArtistForm().addEventListener('submit', createArtistFromForm);
     
     listenForClick()
 
-    deleteAction()
+    deleteArtistAction()
   
   }
 
-  function deleteAction(){ 
-    let deleteButtons = getDeleteButton() 
+  function deleteArtistAction(){ 
+    let deleteButtons = getDeleteArtistButton() 
     for(let i = 0; i < deleteButtons.length; i++){
       deleteButtons[i].addEventListener('click', deleteArtistFromForm)
     }
