@@ -42,7 +42,7 @@ class Artist {
       //   let deleteButton = deleteButtons[lastButton];
 
       //  deleteButton.addEventListener('click', artist.deleteArtistFromForm.bind(artist));
-        Artist.addArtistsToSelectDropDown();
+      // Artist.addArtistsToSelectDropDown();
         Artist.loadArtists();
       });
     });
@@ -52,7 +52,8 @@ class Artist {
   static loadArtists() {
     API.get('/v1/artists')
     // let response = await fetch("http://localhost:3000/api/v1/artists");
-    .then((artists) =>{
+    .then((artists) => {
+      Artist.all = [];
       artists.forEach((data) => {
         let artist = new Artist(data);
         Artist.renderArtistFromTemplate(artist.artistTemplate(artist));
@@ -73,7 +74,7 @@ class Artist {
   static addArtistsToSelectDropDown() {
     let getSelectDropDown = document.querySelector("#artist-select");
     getSelectDropDown.innerHTML = "";
-    this.all.forEach((artist) => {
+    Artist.all.forEach((artist) => {
       //let getSelectDropDown = document.querySelector("#artist-select");
       let option = document.createElement("option");
       option.setAttribute("value", `${artist.id}`);
