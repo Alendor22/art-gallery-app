@@ -1,18 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
-  Artist.loadArtists(); 
   Painting.loadPaintings();
-})
+  Artist.loadArtists(); 
+});
 
 const getArtistForm = () => document.querySelector("#artist-form");
 const getPaintingForm = () => document.querySelector("#insert-painting");
 const getDeleteArtistButton = () => document.querySelectorAll('.artist-card button');
 const getDeletePaintingButton = () => document.querySelectorAll('.painting-card button');
-
+const getPaintings = () => document.querySelector('#paintings');
+const getArtists = () => document.querySelector('#artists');
 
 const getTitle = () => getPaintingForm().querySelector("#title").value;
 const getStyle = () => getPaintingForm().querySelector("#style").value;
 const getPrice = () => getPaintingForm().querySelector("#price").value;
 const getPaintingImage = () => getPaintingForm().querySelector("#painting_image").value;
+
 
 const getName = () => getArtistForm().querySelector('#name').value;
 const getAge = () => getArtistForm().querySelector('#age').value;
@@ -58,12 +60,12 @@ const getGender = () => getArtistForm().querySelector('#gender').value;
 //   });
 // }
 
-Painting.loadPaintings()
-Painting.listenForClick()
+// Painting.loadPaintings()
+// Painting.listenForClick()
 
-painting.deletePaintingFromForm()
+// painting.deletePaintingFromForm()
 
-painting.deletePaintingAction()
+// painting.deletePaintingAction()
 
 // function deletePainting(id) {
 //   fetch(`http://localhost:3000/api/v1/paintings/${id}`, {
@@ -91,7 +93,7 @@ painting.deletePaintingAction()
 
 
 
-Painting.renderPaintingFromTemplate(paintingTemplate)
+// Painting.renderPaintingFromTemplate(paintingTemplate)
 
 
 // getArtistForm().addEventListener('submit', createArtistFromForm);
@@ -136,7 +138,7 @@ Painting.renderPaintingFromTemplate(paintingTemplate)
 //     })
 // }
 
-Artist.renderArtistFromTemplate
+// Artist.renderArtistFromTemplate
 
   // function renderArtistFromTemplate(artistTemplate) {
   //   document.querySelector('#artists').innerHTML += artistTemplate;
