@@ -16,17 +16,29 @@ class Painting {
   }
 
   
-  static async loadPaintings() {
+  static loadPaintings() {
+    
     // let response = await fetch("http://localhost:3000/api/v1/paintings");
     API.get('/v1/paintings')
     // let paintings = await response.json();
+     .then((paintings) => {
+        paintings.forEach((data) => { 
+        let painting = new Painting(data);
+      
+        Painting.renderPaintingFromTemplate(painting.paintingTemplate(painting));
+        });
+        Painting.listenForClick();
+        Painting.deletePaintingAction();
+      });
+  }
+    
+  
   
     // paintings.forEach((data) => {
     //   let painting = new Painting(data);
     //   Painting.renderPaintingFromTemplate(painting.paintingTemplate(painting));
     // });
     // this.deletePaintingAction
-  }
 
   static listenForClick() {
     getPaintingForm().addEventListener("submit", (e) => {
@@ -42,43 +54,44 @@ class Painting {
       painting: { title, style, price, url, artist_id }
     };
   
-    fetch('http://localhost:3000/api/v1/paintings', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(strongParams)
-     })
-      .then(resp => resp.json())
-      .then(data => {
-        console.log(data)
-        let painting = new Painting(data)
-        this.renderPaintingFromTemplate(this.paintingTemplate(painting));
+    // fetch('http://localhost:3000/api/v1/paintings', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(strongParams)
+    //  })
+    API.post('/v1/paintings', strongParams)
+      .then((data) => {
+        let paintingsDiv = getPaintings()
+        paintingsDiv.innerHTML = "";
+        Painting.loadPaintings();
+        // let painting = new Painting(data)
+        // Painting.renderPaintingFromTemplate(painting.paintingTemplate.bind(painting));
+        // console.log(painting);
       
-        let deleteButtons = getDeletePaintingButton();
-        let lastButton = deleteButtons.length-1;
-        let deleteButton = deleteButtons[lastButton];
+        // let deleteButtons = getDeletePaintingButton();
+        // let lastButton = deleteButtons.length-1;
+        // let deleteButton = deleteButtons[lastButton];
   
-         deleteButton.addEventListener('click', this.deletePaintingFromForm);
-  
-         this.deletePaintingFromForm()
-          this.deletePainting(id);
-      })
+        //  deleteButton.addEventListener('click', painting.deletePaintingFromForm.bind(painting));
+      });      
     });
   }
 
   static renderPaintingFromTemplate(paintingTemplate) {
-    document.querySelector('#paintings').innerHTML += paintingTemplate
+    let paintingsDiv = getPaintings()
+    paintingsDiv.innerHTML += paintingTemplate;
   }
 
   paintingTemplate() {
     return `
-        <div class="painting-card">
-          <div class="painting-card-content">
-            <img src="${this.url}">
+      <div class="painting-card">
+        <div class="painting-card-content">
+          <img src="${this.url}">
             <P>Title: ${this.title}</P>
-            <p>Artist: ${this.artist.name}</p>
+            <p>Artist: ${this.artist ? this.artist.name : "NA" }</p>
             <p>Style: ${this.style}</p>
             <p>Price: ${this.price} </p>
             <button id="${this.id}">Delete Painting:</button>
@@ -87,28 +100,25 @@ class Painting {
       `;
   }
 
-  deletePaintingAction() { 
-    let deleteButtons = getDeletePaintingButton() 
-    for(let i = 0; i < deleteButtons.length; i++){
-      deleteButtons[i].addEventListener('click', deletePaintingFromForm)
+  static deletePaintingAction() { 
+    let deleteButtons = getDeletePaintingButton()
+      for(let i = 0; i < deleteButtons.length; i++){
+      deleteButtons[i].addEventListener('click', Painting.deletePaintingFromForm);
     }
   }
 
-  deletePaintingFromForm() {
+  static deletePaintingFromForm() {
     let id = this.id
-    deletePainting(id);
+    Painting.deletePainting(id);
   }
 
-  deletePainting(id) {
-    fetch(`http://localhost:3000/api/v1/paintings/${id}`, {
-    method: 'DELETE'
-    
-    })
-    .then(resp => resp.json())
-    .then(painting => {
-      document.querySelector('#paintings').innerHTML = ""
-      Painting.all = []
-      Painting.loadPaintings()
+  static deletePainting(id) {
+    API.delete(`/v1/paintings/${id}`)
+    .then((painting) => {
+      let paintingsDiv = getPaintings();
+      paintingsDiv.innerHTML = "";
+      Painting.all = [];
+      Painting.loadPaintings();
     })
   }
 
