@@ -47,7 +47,6 @@ class Artist {
 
       Artist.addArtistsToSelectDropDown();
       Artist.deleteArtistAction();
-      Artist.addListenerToArtistForm();
     });
     
   }
@@ -66,7 +65,8 @@ class Artist {
       option.setAttribute("value", `${artist.id}`);
       option.innerText += artist.name
       getSelectDropDown.appendChild(option);
-    }); 
+    });
+    $('select').formSelect(); 
   }
 
   static renderArtistFromTemplate(artistTemplate) {
@@ -81,7 +81,7 @@ class Artist {
             <P>Artist Name: ${this.name}</P>
             <p>Artist Age: ${this.age}</p>
             <p>Artist Gender: ${this.gender}</p>
-            <button id="${this.id}">Delete Artist:</button>
+            <button id="${this.id}" <a class="waves-effect waves-light btn-small">Delete Artist:</button></a>
           </div>
         </div><br>
       `;
