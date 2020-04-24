@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
   Painting.loadPaintings();
-  Artist.loadArtists(); 
+  Painting.listenForClick();
+  Artist.loadArtists();
+  Artist.addListenerToArtistForm() 
 });
 
 const getArtistForm = () => document.querySelector("#artist-form");
