@@ -18,9 +18,7 @@ class Painting {
   
   static loadPaintings() {
     
-    // let response = await fetch("http://localhost:3000/api/v1/paintings");
     API.get('/v1/paintings')
-    // let paintings = await response.json();
      .then((paintings) => {
         paintings.forEach((data) => { 
         let painting = new Painting(data);
@@ -31,14 +29,6 @@ class Painting {
         Painting.deletePaintingAction();
       });
   }
-    
-  
-  
-    // paintings.forEach((data) => {
-    //   let painting = new Painting(data);
-    //   Painting.renderPaintingFromTemplate(painting.paintingTemplate(painting));
-    // });
-    // this.deletePaintingAction
 
   static listenForClick() {
     getPaintingForm().addEventListener("submit", (e) => {
@@ -54,28 +44,11 @@ class Painting {
       painting: { title, style, price, url, artist_id }
     };
   
-    // fetch('http://localhost:3000/api/v1/paintings', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(strongParams)
-    //  })
     API.post('/v1/paintings', strongParams)
       .then((data) => {
         let paintingsDiv = getPaintings()
         paintingsDiv.innerHTML = "";
         Painting.loadPaintings();
-        // let painting = new Painting(data)
-        // Painting.renderPaintingFromTemplate(painting.paintingTemplate.bind(painting));
-        // console.log(painting);
-      
-        // let deleteButtons = getDeletePaintingButton();
-        // let lastButton = deleteButtons.length-1;
-        // let deleteButton = deleteButtons[lastButton];
-  
-        //  deleteButton.addEventListener('click', painting.deletePaintingFromForm.bind(painting));
       });      
     });
   }
@@ -121,6 +94,5 @@ class Painting {
       Painting.loadPaintings();
     })
   }
-
 
 }
