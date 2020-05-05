@@ -11,6 +11,7 @@ const getDeleteArtistButton = () => document.querySelectorAll('.artist-card butt
 const getDeletePaintingButton = () => document.querySelectorAll('.painting-card button');
 const getPaintings = () => document.querySelector('#paintings');
 const getArtists = () => document.querySelector('#artists');
+// const getSubmitButton = () => document.querySelector('#submit-button').value.reset()
 
 const getTitle = () => getPaintingForm().querySelector("#title").value;
 const getStyle = () => getPaintingForm().querySelector("#style").value;
