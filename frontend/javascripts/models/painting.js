@@ -20,11 +20,23 @@ class Painting {
     
     API.get('/v1/paintings')
      .then((paintings) => {
+        paintings.sort((a,b) => {
+        let pa = a.title,
+        pb = b.title 
+        if (pa < pb) {
+          return -1;
+        }
+        if (pa > pb) {
+          return 1;
+        }
+        return 0;
+       });
         paintings.forEach((data) => { 
         let painting = new Painting(data);
-      
+        
         Painting.renderPaintingFromTemplate(painting.paintingTemplate(painting));
         });
+
         Painting.deletePaintingAction();
       });
   }
