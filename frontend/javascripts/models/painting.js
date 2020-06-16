@@ -18,27 +18,28 @@ class Painting {
   
   static loadPaintings() {
     
-    // let response = await fetch("http://localhost:3000/api/v1/paintings");
     API.get('/v1/paintings')
-    // let paintings = await response.json();
      .then((paintings) => {
+        paintings.sort((a,b) => {
+        let pa = a.title,
+        pb = b.title 
+        if (pa < pb) {
+          return -1;
+        }
+        if (pa > pb) {
+          return 1;
+        }
+        return 0;
+       });
         paintings.forEach((data) => { 
         let painting = new Painting(data);
-      
+        
         Painting.renderPaintingFromTemplate(painting.paintingTemplate(painting));
         });
-        Painting.listenForClick();
+
         Painting.deletePaintingAction();
       });
   }
-    
-  
-  
-    // paintings.forEach((data) => {
-    //   let painting = new Painting(data);
-    //   Painting.renderPaintingFromTemplate(painting.paintingTemplate(painting));
-    // });
-    // this.deletePaintingAction
 
   static listenForClick() {
     getPaintingForm().addEventListener("submit", (e) => {
@@ -54,28 +55,11 @@ class Painting {
       painting: { title, style, price, url, artist_id }
     };
   
-    // fetch('http://localhost:3000/api/v1/paintings', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(strongParams)
-    //  })
     API.post('/v1/paintings', strongParams)
       .then((data) => {
         let paintingsDiv = getPaintings()
         paintingsDiv.innerHTML = "";
         Painting.loadPaintings();
-        // let painting = new Painting(data)
-        // Painting.renderPaintingFromTemplate(painting.paintingTemplate.bind(painting));
-        // console.log(painting);
-      
-        // let deleteButtons = getDeletePaintingButton();
-        // let lastButton = deleteButtons.length-1;
-        // let deleteButton = deleteButtons[lastButton];
-  
-        //  deleteButton.addEventListener('click', painting.deletePaintingFromForm.bind(painting));
       });      
     });
   }
@@ -87,16 +71,24 @@ class Painting {
 
   paintingTemplate() {
     return `
-      <div class="painting-card">
+    <div class="painting-card">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="${this.url}">
+        </div>
         <div class="painting-card-content">
-          <img src="${this.url}">
-            <P>Title: ${this.title}</P>
+          <span class="card-title activator grey-text text-darken-4">Title: ${this.title}<i class="material-icons right">more_horiz</i>
+          </span>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Tap To Show Art<i class="material-icons right">loop</i></span>
             <p>Artist: ${this.artist ? this.artist.name : "NA" }</p>
             <p>Style: ${this.style}</p>
             <p>Price: ${this.price} </p>
-            <button id="${this.id}">Delete Painting:</button>
-          </div>
-        </div><br>
+        </div>      
+        <button id="${this.id}"<a class="waves-effect waves-light btn-small">Delete Painting:</button></a>
+      </div>  
+    </div><br>
       `;
   }
 
@@ -121,6 +113,5 @@ class Painting {
       Painting.loadPaintings();
     })
   }
-
 
 }

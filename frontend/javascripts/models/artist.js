@@ -31,36 +31,22 @@ class Artist {
         let artistDiv = getArtists();
         artistDiv.innerHTML = "";
 
-        
-        
-      //   let artist = new Artist(artistJSON);
-
-      //   Artist.renderArtistFromTemplate(artist.artistTemplate.bind(artist));
-      
-      //   let deleteButtons = getDeleteArtistButton();
-      //   let lastButton = deleteButtons.length-1;
-      //   let deleteButton = deleteButtons[lastButton];
-
-      //  deleteButton.addEventListener('click', artist.deleteArtistFromForm.bind(artist));
-      // Artist.addArtistsToSelectDropDown();
         Artist.loadArtists();
       });
-    });
-     
+    });  
   }
 
   static loadArtists() {
     API.get('/v1/artists')
-    // let response = await fetch("http://localhost:3000/api/v1/artists");
     .then((artists) => {
       Artist.all = [];
       artists.forEach((data) => {
         let artist = new Artist(data);
         Artist.renderArtistFromTemplate(artist.artistTemplate(artist));
       });
+
       Artist.addArtistsToSelectDropDown();
       Artist.deleteArtistAction();
-      Artist.addListenerToArtistForm();
     });
     
   }
@@ -75,12 +61,12 @@ class Artist {
     let getSelectDropDown = document.querySelector("#artist-select");
     getSelectDropDown.innerHTML = "";
     Artist.all.forEach((artist) => {
-      //let getSelectDropDown = document.querySelector("#artist-select");
       let option = document.createElement("option");
       option.setAttribute("value", `${artist.id}`);
       option.innerText += artist.name
       getSelectDropDown.appendChild(option);
-    }); 
+    });
+    $('select').formSelect(); 
   }
 
   static renderArtistFromTemplate(artistTemplate) {
@@ -95,12 +81,11 @@ class Artist {
             <P>Artist Name: ${this.name}</P>
             <p>Artist Age: ${this.age}</p>
             <p>Artist Gender: ${this.gender}</p>
-            <button id="${this.id}">Delete Artist:</button>
+            <button id="${this.id}" <a class="waves-effect waves-light btn-small">Delete Artist:</button></a>
           </div>
         </div><br>
       `;
   }
-
 
   static deleteArtistAction() { 
     let deleteButtons = getDeleteArtistButton()

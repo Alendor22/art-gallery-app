@@ -3,73 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Art-Gallery-App</title>
+  <title>Artster</title>
    <!--Import Google Icon Font-->
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <!--Import materialize.css-->
-   <!--<link type="text/css" rel="stylesheet" href="../css/materialize.css"  media="screen,projection"/>-->
+   <link type="text/css" rel="stylesheet" href="../css/materialize.css"  media="screen,projection"/>
    <!--Let browser know website is optimized for mobile-->
    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
-<body>
-  <h1>Art-Gallery-App</h1>
+<body class="red lighten-3">
+ 
+  <h1 class="deep-purple-text">Artster</h1>
 
-    <form id="insert-painting">
-      <div>
+    <form id="insert-painting" class="col s12">
+      <div class="input-field col s6">
         <label for="title">Title:</label>
         <input type="text" name="title" id="title">
       </div><br>
-      <div>
+      <div class="input-field col s6">
         <label for="style">Style:</label>
         <input type="text" name="style" id="style">
       </div><br>
-      <div>
+      <div class="input-field col s6">
         <label for="price">Price:</label>
         <input type="text" name="price" id="price">
       </div><br>
-      <div id="search">
+      <div id="search" class="input-field col s6">
         <label for="search">Search for an image:</label>
         <script async src="https://cse.google.com/cse.js?cx=004943234794607487493:byuxgebpvnz"></script>
       </div>
       <div class="gcse-search"></div>
-      <div>
+      <div class="input-field col s6">
         <label for="url">Insert\Paste Image:</label>
         <input type="text" name="url" id="url">
       </div><br>
-      <div id="add-artist">
+      <div class="input-field col s12">
         <select name="artist" id="artist-select">
           <option value="">--Please choose an artist--</option>
       </select>
       </div><br>
-        <input type="submit" value="Add Painting">
-    </form>
+      <button class="btn waves-effect waves-red" type="submit" name="action">Add Painting
+        <i class="material-icons right">photo</i>
+      </button>
+    </form><br>
       <div id="paintings">
 
       </div><br>
     <div id="artists">
       
     </div><br>
-    <form id="artist-form">
-      <div>
+    <form id="artist-form" class="col s12">
+      <div class="input-field col s6">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name">
       </div><br>
-      <div>
+      <div class="input-field col s6">
         <label for="age">Age:</label>
         <input type="text" name="age" id="age">
       </div><br>
-      <div>
+      <div class="input-field col s6">
         <label for="gender">Gender:</label>
         <input type="text" name="gender" id="gender">
       </div><br>
-      <input type="submit" value="Create Artist">
-    </form>
+      <button id="submit-button" class="btn waves-effect waves-red" type="submit" name="action">Create Artist
+        <i class="material-icons right">person_add</i>
+      </button>
+    </form><br>
 
-    <!-- <div id="search">
-      <script async src="https://cse.google.com/cse.js?cx=004943234794607487493:byuxgebpvnz"></script>
-    </div>
-    <div class="gcse-search"></div> -->
-    
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> 
   <script type="text/javascript" src="javascripts/materialize.js"></script>
   <script src="javascripts/models/painting.js"></script>
   <script src="javascripts/models/artist.js"></script>

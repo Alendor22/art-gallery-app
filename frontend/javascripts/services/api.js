@@ -13,7 +13,7 @@ class API {
   }
 
   static post(url, data) {
-     return fetch(this.baseURL + url, {
+     return fetch(API.baseURL + url, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
