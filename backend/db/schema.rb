@@ -10,27 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2020_04_11_193913) do
-
+ActiveRecord::Schema[6.1].define(version: 20_200_411_193_913) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "artists", force: :cascade do |t|
-    t.string "name"
-    t.string "age"
-    t.string "gender"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'artists', force: :cascade do |t|
+    t.string 'name'
+    t.string 'age'
+    t.string 'gender'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "paintings", force: :cascade do |t|
-    t.string "title"
-    t.string "style"
-    t.string "price"
-    t.string "url"
-    t.integer "artist_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'paintings', force: :cascade do |t|
+    t.string 'title'
+    t.string 'style'
+    t.string 'price'
+    t.string 'url'
+    t.integer 'artist_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
-
 end
