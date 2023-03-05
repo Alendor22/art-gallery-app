@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: backend_production
   username: Alendor22
   password: <%= ENV['micah'] %>
