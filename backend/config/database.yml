@@ -16,6 +16,7 @@
 #
 default: &default
   adapter: postgresql
+  database: db/production.postgres
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
@@ -82,5 +83,6 @@ production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
   database: backend_production
+  host: localhost
   username: Alendor22
   password: micah
