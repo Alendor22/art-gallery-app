@@ -15,12 +15,10 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
+  adapter: postgres
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
-  username: <%= ENV['Alendor22'] %>
-  password: <%= ENV['micah'] %>
   database: <%= ENV['postgres'] %>
 
 #development:
@@ -73,7 +71,7 @@ default: &default
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #
-   DATABASE_URL="postgres://zwnkbnnpycuowi:85474e1eaa8fb9b28d9a12c3c5e1fa538e530ab5005b65fd229260eaf95692ef@ec2-44-194-92-192.compute-1.amazonaws.com:5432/d7j2he0vfugu12"
+   DATABASE_URL="local host"
 #
 # You can use this database configuration with:
 #
@@ -83,7 +81,6 @@ production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
   database: backend_production
-  host: localhost
-  username: Alendor22
+  username: postgres
   password: micah
   
