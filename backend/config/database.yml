@@ -86,4 +86,10 @@ production:
   host: localhost
   username: Alendor22
   password: micah
+
+staging:
+  url: <%= ENV['DATABASE_URL'] %>
+
+production:
+  url: <%= ENV['DATABASE_URL'] %> 
   
