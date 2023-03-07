@@ -16,11 +16,12 @@
 #
 default: &default
   adapter: postgresql
-  database: db/production.postgres
   encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  username: <%= ENV['Alendor22'] %>
+  password: <%= ENV['micah'] %>
+  database: <%= ENV['postgres'] %>
 
 #development:
 #  <<: *default
@@ -57,8 +58,8 @@ default: &default
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 #test:
-  <<: *default
-  database: backend_test
+#  <<: *default
+#  database: backend_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -72,12 +73,11 @@ default: &default
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #
-#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+   DATABASE_URL="postgres://zwnkbnnpycuowi:85474e1eaa8fb9b28d9a12c3c5e1fa538e530ab5005b65fd229260eaf95692ef@ec2-44-194-92-192.compute-1.amazonaws.com:5432/d7j2he0vfugu12"
 #
 # You can use this database configuration with:
 #
-   production:
-     url: <%= ENV['postgres://zwnkbnnpycuowi:85474e1eaa8fb9b28d9a12c3c5e1fa538e530ab5005b65fd229260eaf95692ef@ec2-44-194-92-192.compute-1.amazonaws.com:5432/d7j2he0vfugu12'] %>
+     
 #
 production:
   <<: *default
@@ -86,10 +86,4 @@ production:
   host: localhost
   username: Alendor22
   password: micah
-
-staging:
-  url: <%= ENV['DATABASE_URL'] %>
-
-production:
-  url: <%= ENV['DATABASE_URL'] %> 
   
