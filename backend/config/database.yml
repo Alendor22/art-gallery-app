@@ -15,7 +15,7 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgres
+  adapter: postgresql
   database: db/production.postgres
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
@@ -84,4 +84,6 @@ production:
   url: <%= ENV['DATABASE_URL'] %>
   database: backend_production
   host: localhost
+  username: Alendor22
+  password: micah
   
