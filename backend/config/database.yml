@@ -24,12 +24,11 @@ default: &default
 development:
   <<: *default
   adapter: postgresql
-   database: db/.postgresql
   encoding: unicode
-  database: Artster
+  database: d7j2he0vfugu12
   pool: 5
-  username: alendor
-  password: micah   ### password you have specified within psql
+  username: zwnkbnnpycuowi
+  password: 85474e1eaa8fb9b28d9a12c3c5e1fa538e530ab5005b65fd229260eaf95692ef   ### password you have specified within psql
   host: localhost
   port: 5432
 
@@ -83,8 +82,9 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
+   production:
+     url: <%= ENV['postgres://zwnkbnnpycuowi:85474e1eaa8fb9b28d9a12c3c5e1fa538e530ab5005b65fd229260eaf95692ef@ec2-44-194-92-192.compute-1.amazonaws.com:5432/d7j2he0vfugu12
+'] %>
 #
 production:
   <<: *default
